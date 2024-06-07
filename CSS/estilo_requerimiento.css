@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+}
+
+header {
+    background-color: #FFBC47;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+    max-width: 100px;
+    height: auto;
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+main {
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Añadir esta regla para centrar el botón */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px; /* Espaciado superior opcional */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #51af1b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #255d02;
+}
+
+
+/* Estilos para los botones de agregar */
+.add-button {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para los campos adicionales generados */
+.additional-field {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    main {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}
+
+
+

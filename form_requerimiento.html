@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requerimiento de Material de Empaque</title>
+    <link rel="stylesheet" href="CSS/estilo_requerimiento.css">
+</head>
+<body>
+    <header>
+        <img src="IMG/logo.svg" alt="Logo" class="header-logo">
+        <h1>Requerimiento de Material de Empaque</h1>
+    </header>
+    <main>
+        <form id="requerimiento-form">
+            <div class="form-group">
+                <label for="dia">Día:</label>
+                <input type="date" id="dia" name="dia" required>
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora" name="hora" required>
+                <label for="supervisor">Nombre del Supervisor:</label>
+                <input type="text" id="supervisor" name="supervisor" pattern="[A-Za-z\s]+" title="Solo letras y espacios" required>
+                <label for="linea">Linea:</label>
+                <input type="number" id="linea" name="linea" min="1" required>
+            </div>
+            <!-- Sección Cajas -->
+            <h2>Cajas</h2>
+            <div id="cajas-container">
+                <div class="form-group" id="caja-1">
+                    <label for="cajas_paq">PAQ:</label>
+                    <input type="text" id="cajas_paq" name="cajas_paq" required>
+                    <label for="cajas_desc">Descripción:</label>
+                    <input type="text" id="cajas_desc" name="cajas_desc" required>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="agregarCaja()">Agregar Caja</button>
+            
+            <h2>Bobina</h2>
+            <div id="bobina-container">
+                <div class="form-group" id="bobina-1">
+                    <label for="bobina_uni">UNI:</label>
+                    <input type="text" id="bobina_uni" name="bobina_uni" required>
+                    <label for="bobina_desc">Descripción:</label>
+                    <input type="text" id="bobina_desc" name="bobina_desc" required>
+                    <label for="bobina_peso">Peso/Kilos:</label>
+                    <input type="number" id="bobina_peso" name="bobina_peso" required>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="agregarBobina()">Agregar Bobina</button>
+            
+            <h2>Otros - Especifique</h2>
+            <div id="otros-container">
+                <div class="form-group" id="otros-1">
+                    <label for="otros_cant">CANT:</label>
+                    <input type="text" id="otros_cant" name="otros_cant" required>
+                    <label for="otros_desc">Descripción:</label>
+                    <input type="text" id="otros_desc" name="otros_desc" required>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="agregarOtros()">Agregar Otro</button>
+            
+            <br><br><br>
+            <!--BOTONES-->
+            <!-- Botones -->
+            <div class="form-group button-container">
+                <button type="button" id="procesar-btn" onclick="processRequerimiento()">Procesar Requerimiento</button>
+                <button type="button" onclick="resetFormulario()">Nuevo Requerimiento</button>
+            </div>
+        </form>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="JS/script.js"></script>
+    <script src="JS/script2.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
