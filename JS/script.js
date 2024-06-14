@@ -1,4 +1,4 @@
-// Función para mostrar alerta
+// Función para mostrar una alerta personalizada
 function showCustomAlert() {
     document.getElementById("custom-alert").style.display = "block";
 }
@@ -7,11 +7,35 @@ function closeAlert() {
     document.getElementById("custom-alert").style.display = "none";
 }
 
+// Función para mostrar una alerta de éxito
+function showSuccessAlert() {
+    const successAlert = document.createElement("div");
+    successAlert.id = "success-alert";
+    successAlert.style.position = "fixed";
+    successAlert.style.top = "50%";
+    successAlert.style.left = "50%";
+    successAlert.style.transform = "translate(-50%, -50%)";
+    successAlert.style.backgroundColor = "#dff0d8";
+    successAlert.style.color = "#3c763d";
+    successAlert.style.padding = "20px";
+    successAlert.style.border = "1px solid #d6e9c6";
+    successAlert.style.borderRadius = "5px";
+    successAlert.style.boxShadow = "0 0 10px rgba(0,0,0,0.1)";
+    successAlert.style.zIndex = "9999";
+    successAlert.textContent = "Requerimiento enviado con éxito";
+    
+    document.body.appendChild(successAlert);
+    
+    setTimeout(() => {
+        successAlert.remove();
+    }, 9000); // 
+}
+
 // Función para confirmar y enviar el requerimiento
 async function confirmRequerimiento() {
     closeAlert();
 
-    // Se obtienen los valores de los campos del formulario
+    // Obtén los valores de los campos del formulario
     var dia = document.getElementById('dia').value;
     var hora = document.getElementById('hora').value;
     var supervisor = document.getElementById('supervisor').value;
@@ -31,12 +55,12 @@ async function confirmRequerimiento() {
     var otrosDescs = Array.from(document.querySelectorAll("#otros-container .form-group input[name='otros_desc']"))
                            .map(input => input.value);
 
-    // Se obtiene el correlativo
+    // Obtener el correlativo del localStorage
     var correlativo = parseInt(localStorage.getItem('pdfCorrelativo')) || 0;
     correlativo += 1;
     localStorage.setItem('pdfCorrelativo', correlativo);
 
-    // Prámetros para el correo
+    // Construir los parámetros para el correo
     const templateParams = {
         dia: dia,
         hora: hora,
@@ -52,19 +76,20 @@ async function confirmRequerimiento() {
         message: `Adjunto encontrará el PDF del requerimiento con correlativo ${correlativo}.`
     };
 
-    // Enviar el correo usando API emailjs
+    // Enviar el correo usando emailjs
     emailjs.send('service_bliaiey', 'template_3i2e4ih', templateParams, 'Z19AGyi2zEck-Ssxx')
         .then((response) => {
             console.log('SUCCESS!', response.status, response.text);
+            showSuccessAlert(); // Mostrar la alerta de éxito
         }, (error) => {
             console.log('FAILED...', error);
         });
 
-    // FUNCION PDF (OCULTA)
+    // Crear el PDF
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // Contenido del PDF
+    // Definir el contenido del PDF
     const rows = [];
 
     // Encabezado
@@ -82,7 +107,7 @@ async function confirmRequerimiento() {
     rows.push(["Supervisor", supervisor]);
     rows.push(["Línea", linea]);
 
-    // SE AÑADE LOS DATOS DE LAS CAJAS A LA TABLA
+    // Añadir cajas a la tabla
     if (cajasPaqs.length > 0) {
         rows.push(["Cajas", ""]);
         cajasPaqs.forEach((cajasPaq, index) => {
@@ -91,7 +116,7 @@ async function confirmRequerimiento() {
         });
     }
 
-    // SE AÑADEN LOS DATOS DE LAS BOBINAS A LA TABLA
+    // Añadir bobinas a la tabla
     if (bobinasUni.length > 0) {
         rows.push(["Bobinas", ""]);
         bobinasUni.forEach((bobinaUni, index) => {
@@ -101,7 +126,7 @@ async function confirmRequerimiento() {
         });
     }
 
-    // SE AÑADEN LOS DATOS DE OTROS A LA TABLA
+    // Añadir otros elementos a la tabla
     if (otrosCants.length > 0) {
         rows.push(["Otros", ""]);
         otrosCants.forEach((otrosCant, index) => {
@@ -110,7 +135,7 @@ async function confirmRequerimiento() {
         });
     }
 
-    // CREACION Y DISEÑO DE LA TABLA
+    // Crear la tabla en el PDF
     doc.autoTable({
         startY: 35,
         head: [['Campo', 'Valor']],
@@ -146,15 +171,13 @@ async function confirmRequerimiento() {
         }
     });
 
+
 }
 
-// FUNCION DE LOS BOTONES
+// Asigna la función a los botones
 document.getElementById("procesar-btn").onclick = showCustomAlert;
 document.getElementById("alert-confirm").onclick = confirmRequerimiento;
 document.getElementById("alert-cancel").onclick = closeAlert;
-
-
-
 
 function agregarCaja() {
     const container = document.getElementById("cajas-container");
@@ -209,6 +232,7 @@ function resetFormulario() {
     document.getElementById("bobina-container").innerHTML = '';
     document.getElementById("otros-container").innerHTML = '';
 }
+
 
 
 
