@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Requerimiento de Material de Empaque</title>
     <link rel="stylesheet" href="CSS/estilo_requerimiento.css">
+    <link rel="shortcut icon" href="IMG/logo.svg" />
+    <!-- LIBRERIAS Y API-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
 </head>
 <body>
     <header>
@@ -12,6 +17,7 @@
         <h1>Requerimiento de Material de Empaque</h1>
     </header>
     <main>
+        <!--FORMULARIO DE REQUERIMIENTO -->
         <form id="requerimiento-form">
             <div class="form-group">
                 <label for="dia">Día:</label>
@@ -23,7 +29,6 @@
                 <label for="linea">Linea:</label>
                 <input type="number" id="linea" name="linea" min="1" required>
             </div>
-            <!-- Sección Cajas -->
             <h2>Cajas</h2>
             <div id="cajas-container">
                 <div class="form-group" id="caja-1">
@@ -34,7 +39,6 @@
                 </div>
             </div>
             <button type="button" class="add-button" onclick="agregarCaja()">Agregar Caja</button>
-            
             <h2>Bobina</h2>
             <div id="bobina-container">
                 <div class="form-group" id="bobina-1">
@@ -47,7 +51,6 @@
                 </div>
             </div>
             <button type="button" class="add-button" onclick="agregarBobina()">Agregar Bobina</button>
-            
             <h2>Otros - Especifique</h2>
             <div id="otros-container">
                 <div class="form-group" id="otros-1">
@@ -58,20 +61,24 @@
                 </div>
             </div>
             <button type="button" class="add-button" onclick="agregarOtros()">Agregar Otro</button>
-            
             <br><br><br>
-            <!--BOTONES-->
-            <!-- Botones -->
+            <!--BOTONES -->
             <div class="form-group button-container">
-                <button type="button" id="procesar-btn" onclick="processRequerimiento()">Procesar Requerimiento</button>
+                <button type="button" id="procesar-btn" onclick="showCustomAlert()">Procesar Requerimiento</button>
                 <button type="button" onclick="resetFormulario()">Nuevo Requerimiento</button>
             </div>
         </form>
+        <div id="custom-alert" class="custom-alert">
+            <div class="custom-alert-content">
+                <p id="alert-message">¿Está seguro de procesar el requerimiento?</p>
+                <button id="alert-confirm" onclick="confirmRequerimiento()">Aceptar</button>
+                <br>
+                <button id="alert-cancel" onclick="closeAlert()">Cancelar</button>
+            </div>
+        </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <!--SCRIPT JS-->
     <script src="JS/script.js"></script>
-    <script src="JS/script2.js"></script>
 </body>
 </html>
 
